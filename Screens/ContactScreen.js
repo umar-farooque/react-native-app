@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import AppText from "../components/AppText";
 import Screen from "../components/Screen";
 

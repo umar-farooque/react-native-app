@@ -14,9 +14,9 @@ function HomeScreen(props) {
   useEffect(() => {
     getListingsApi.request();
     props.getPosts(getListingsApi.data);
-    console.log(props.data);
   }, [props.data]);
   //   console.log(getListingsApi.data);
+  console.log(props);
   return (
     <ScrollView style={styles.container}>
       {getListingsApi.loading && (

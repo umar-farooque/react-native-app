@@ -24,12 +24,7 @@ function CustomDrawerScreen(props) {
         />
         <DrawerItem
           icon={({ color, size }) => (
-            <Icon
-              name="gift-outline"
-              color={color}
-              size={size}
-              type="ionicon"
-            />
+            <Icon name="mail" color={color} size={size} type="ionicon" />
           )}
           label="Contact US"
           // labelStyle={{ fontSize: 20 }}
@@ -41,7 +36,7 @@ function CustomDrawerScreen(props) {
           icon={({ color, size }) => (
             <Icon name="user" color={color} size={size} type="antdesign" />
           )}
-          label="My Profile"
+          label="About Us"
           // labelStyle={{ fontSize: 20 }}
           onPress={() => {
             props.navigation.navigate("AboutUs");
