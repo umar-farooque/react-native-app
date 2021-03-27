@@ -6,8 +6,7 @@ const PostSlice = createSlice({
   initialState: { list: [] },
   reducers: {
     postRecieved: (state, action) => {
-      // console.log("POSTS REDUX -->>>", action.payload);
-      state.list = action.payload;
+      state.list = action.payload.slice(0, 30);
     },
   },
 });
@@ -15,6 +14,12 @@ const PostSlice = createSlice({
 export default PostSlice.reducer;
 export const { postRecieved } = PostSlice.actions;
 
-export const getPosts = (data) => (dispatch, getState) => {
-  dispatch(postRecieved(data));
+const url = "/posts";
+export const loadPost = () => (dispatch, getState) => {
+  dispatch(
+    actions.apiCallBeganForPost({
+      url: `${url}`,
+      onSuccess: postRecieved.type,
+    })
+  );
 };

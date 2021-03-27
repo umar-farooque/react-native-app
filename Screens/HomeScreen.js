@@ -3,26 +3,19 @@ import { ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import listingsApi from "../api/posts";
 
 import Card from "../components/Card";
-
-import useApi from "../hooks/useApi";
 import { connect } from "react-redux";
-import { getPosts } from "../store/reducers";
+import { loadPost } from "../store/reducers";
 
 function HomeScreen(props) {
-  let getListingsApi = useApi(listingsApi.getListings);
-
+  let [data, setData] = useState([]);
   useEffect(() => {
-    getListingsApi.request();
-    props.getPosts(getListingsApi.data);
-  }, [props.data]);
-  //   console.log(getListingsApi.data);
-  console.log(props);
+    props.loadPost();
+    setData(props.data);
+  }, [props.data !== data]);
+
   return (
     <ScrollView style={styles.container}>
-      {getListingsApi.loading && (
-        <ActivityIndicator size="large" color="blue" />
-      )}
-      {props.data.map((d) => (
+      {data.map((d) => (
         <Card key={d.id} id={d.id} title={d.title} body={d.body} />
       ))}
     </ScrollView>
@@ -38,6 +31,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPosts: (data) => dispatch(getPosts(data)),
+  loadPost: () => dispatch(loadPost()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
